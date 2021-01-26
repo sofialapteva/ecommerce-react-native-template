@@ -1,0 +1,12 @@
+{
+  "name": "ecommerce-templae",
+  "displayName": "ecommerce-templae",
+  "expo": {
+    "name": "ecommerce-templae",
+    "slug": "ecommerce-templae",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
