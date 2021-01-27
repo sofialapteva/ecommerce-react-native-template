@@ -132,7 +132,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.ecommercetemplae"
+        applicationId "com.ecommercetemplate"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,9 +1,9 @@
 {
-  "name": "ecommerce-templae",
-  "displayName": "ecommerce-templae",
+  "name": "ecommerce-template",
+  "displayName": "ecommerce-template",
   "expo": {
-    "name": "ecommerce-templae",
-    "slug": "ecommerce-templae",
+    "name": "ecommerce-template",
+    "slug": "ecommerce-template",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"

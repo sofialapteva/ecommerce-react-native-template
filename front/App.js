@@ -1,21 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
+import NavBar from './src/components/NavBar'
+import Main from './src/components/Main'
+import Menu from './src/components/Menu/Menu'
+import Cart from './src/components/Cart'
+import styles from './src/styles'
+
 
 export default function App() {
+  const [component, setComponent] = React.useState('Cart')
+  const links = ['Menu', 'Main', 'Cart']
+
+  const changeState = (name) => {
+    switch (name) {
+      case 'Main':
+        setComponent('Main')
+        break;
+      case 'Cart':
+        setComponent('Cart')
+        break;
+      case 'Menu':
+        setComponent('Menu')
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.appContainer}>
+      <NavBar style={styles.navbar} changeState={changeState} links={links} />
+      {component === 'Cart' ? <Cart /> : <></>}
+      {component === 'Main' ? <Main /> : <></>}
+      {component === 'Menu' ? <Menu /> : <></>}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

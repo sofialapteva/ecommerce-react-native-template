@@ -1,4 +1,4 @@
-package com.ecommercetemplae;
+package com.ecommercetemplate;
 
 import android.os.Bundle;
 
