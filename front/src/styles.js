@@ -3,19 +3,12 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    alignItems: 'center',
     borderTopColor: 'black',
     borderTopWidth: 25
   },
   cart: {
     height: '93%',
     width: '100%',
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    paddingVertical: 3,
   },
   listOfItemsInCard: {
     height: 250,
@@ -41,7 +34,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   emptyCartImage: {
-    color: 'blue',
     width: 200,
     height: 200,
     maxWidth: '90%',
@@ -102,12 +94,21 @@ const styles = StyleSheet.create({
   largeText: {
     fontSize: 17,
     fontWeight: 'bold',
-    marginBottom: 3
+    marginBottom: 3,
+    textAlign: 'center'
   },
   crossedText: {
     fontSize: 15,
     textDecorationLine: 'line-through'
+  },
+  tabNav: {
+    fontSize: 30
   }
 })
 
 export default styles
+
+export const stylesTailwind = {
+  menuItem: 'h-20 w-full rounded-xl bg-gray-300 py-6 flex flex-row justify-around mb-2',
+  menuText: 'text-xl font-bold text-center',
+}
