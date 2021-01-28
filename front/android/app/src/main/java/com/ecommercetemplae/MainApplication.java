@@ -6,6 +6,9 @@ import android.net.Uri;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+//
+import io.invertase.firebase.auth.RNFirebaseAuthPackage; 
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -41,7 +44,9 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
+      @SuppressWarnings("UnnecessaryLocalVariable")
       List<ReactPackage> packages = new PackageList(this).getPackages();
+      packages.add(new ReactNativeFirebaseAppPackage(); 
       packages.add(new ModuleRegistryAdapter(mModuleRegistryProvider));
       return packages;
     }

@@ -12,8 +12,8 @@ function Item({ item, removeItem }) {
         <Text>ID: {item.productId}</Text>
       </View>
       <View>
-        <Text style={styles.crossedText}>{item.price}</Text>
-        <Text style={styles.largeText}>{item.priceDiscount}</Text>
+        <Text style={styles.crossedText}>{item.oldPrice}</Text>
+        <Text style={styles.largeText}>{item.price}</Text>
       </View>
       <Entypo name="circle-with-cross" size={24} color="gray" style={styles.iconCross} onPress={() => removeItem(item.productId)} />
     </View>
