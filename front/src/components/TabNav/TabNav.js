@@ -6,6 +6,7 @@ import Cart from '../Cart/Cart'
 import Menu from '../Menu/Menu'
 import Main from '../Main/Main'
 import Account from '../Account/Account'
+import AuthForm from '../AuthForm/AuthForm'
 
 
 const Tab = createBottomTabNavigator();
@@ -37,6 +38,7 @@ export default function Some() {
       <Tab.Screen name="Account" component={Account} />
       <Tab.Screen name="Cart" component={Cart} />
       <Tab.Screen name="Menu" component={Menu} />
+      <Tab.Screen name="Auth" component={AuthForm} />
     </Tab.Navigator>
   );
 }

@@ -9,7 +9,7 @@ enableScreens()
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'
-
+import AuthForm from './src/components/AuthForm/AuthForm'
 const Stack = createStackNavigator()
 
 
