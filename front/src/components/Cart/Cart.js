@@ -4,61 +4,73 @@ import Item from './Item'
 import styles from '../../styles'
 import NavButton from '../commonComponents/NavButton'
 import TopBar from '../TopBar/TopBar'
+import { db } from '../../../firebase'
 
 function Cart() {
   const itemsInCart = [{
     uri: 'https://reactnative.dev/img/tiny_logo.png',
     productName: 'React crash course',
     productId: '1Y23d45s61',
-    price: '100$',
-    priceDiscount: '50$',
+    oldPrice: '100$',
+    price: '50$',
   },
   {
     uri: 'https://reactnative.dev/img/tiny_logo.png',
     productName: 'React crash course',
     productId: '1Y23d45s62',
-    price: '100$',
-    priceDiscount: '50$',
+    oldPrice: '100$',
+    price: '50$',
   },
   {
     uri: 'https://reactnative.dev/img/tiny_logo.png',
     productName: 'React crash course',
     productId: '1Y23d45s63',
-    price: '100$',
-    priceDiscount: '50$',
+    oldPrice: '100$',
+    price: '50$',
   },
   {
     uri: 'https://reactnative.dev/img/tiny_logo.png',
     productName: 'React crash course',
     productId: '1Y23d45s64',
-    price: '100$',
-    priceDiscount: '50$',
+    oldPrice: '100$',
+    price: '50$',
   },
   {
     uri: 'https://reactnative.dev/img/tiny_logo.png',
     productName: 'React crash course',
     productId: '1Y23d45s65',
-    price: '100$',
-    priceDiscount: '50$',
+    oldPrice: '100$',
+    price: '50$',
   },
   {
     uri: 'https://reactnative.dev/img/tiny_logo.png',
     productName: 'React crash course',
     productId: '1Y23d45s66',
-    price: '100$',
-    priceDiscount: '50$',
+    oldPrice: '100$',
+    price: '50$',
   },
   {
     uri: 'https://reactnative.dev/img/tiny_logo.png',
     productName: 'React crash course',
     productId: '1Y23d45s67',
-    price: '100$',
-    priceDiscount: '50$',
+    oldPrice: '100$',
+    price: '50$',
   },]
 
   const renderItem = ({ item }) => (<Item item={item} removeItem={removeItem} />)
   const [items, setItems] = React.useState(itemsInCart);
+  const [itemsFs, setItemsFs] = React.useState([]);
   const [placeholder, setPlaceholder] = React.useState(null);
+
+  React.useEffect(() => {
+    (async () => {
+      const itemsRef = db.collection('Items');
+      const snapshot = await itemsRef.get();
+      snapshot.forEach(doc => {
+        console.log(doc.id, '=>', doc.data());
+      });
+    })()
+  }, [])
 
   const removeItem = (productId) => {
     const filteredItems = items.filter(el => el.productId !== productId);
