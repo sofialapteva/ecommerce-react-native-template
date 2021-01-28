@@ -1,5 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import AuthForm from './components/authForm';
 import TabNav from './src/components/TabNav/TabNav'
 import styles from './src/styles'
 import { enableScreens } from 'react-native-screens'
@@ -21,6 +22,24 @@ const Stack = createStackNavigator()
 export default function App() {
 
   return (
+    <View style={styles.container}>
+      <Text>Hello!</Text>
+     <AuthForm />
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+
     <NavigationContainer>
       <View style={styles.appContainer}>
         <TabNav />

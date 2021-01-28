@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1001010159481",
+    "project_id": "constructor-of-internet-shop",
+    "storage_bucket": "constructor-of-internet-shop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001010159481:android:81033b1db072dc767cd9a8",
+        "android_client_info": {
+          "package_name": "com.ecommercetemplae"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001010159481-buenvp98iuoj2g070ve13e4t5an5oiot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo2q_BKb16UtCjXcwNU1umldxedcmDS5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001010159481-buenvp98iuoj2g070ve13e4t5an5oiot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
