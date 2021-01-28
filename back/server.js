@@ -1,5 +1,9 @@
 const express = require('express')
 
+const firebase = require("firebase");
+// Required for side-effects
+require("firebase/firestore");
+
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
