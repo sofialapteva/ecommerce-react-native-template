@@ -12,7 +12,7 @@ function Main({ navigation }) {
     db.collection("Items").get().then((data) => {
       data.forEach((doc) => {
         const details = doc.data()
-        setItems((pre => [...pre, { id: doc.id, oldPrice: details.oldPrice, price: details.price, productName: details.productName, tags: details.tags }]))
+        setItems((pre => [...pre, { id: doc.id, oldPrice: details.oldPrice, price: details.price, productName: details.productName, tags: details.tags, uri: details.uri }]))
       });
     })
   }
@@ -23,10 +23,6 @@ function Main({ navigation }) {
   return (
     <View>
       <TopBar style={styles.navbar} tabName={'Ecommerce Template'} />
-      <Button title='Account' onPress={() => navigation.navigate('Account')} />
-      <Button title='Menu' onPress={() => navigation.navigate('Menu')} />
-      <Button title='Cart' onPress={() => navigation.navigate('Cart')} />
-      <Text>Main component</Text>
       {items.map(el => {
         console.log(el)
         return <ItemOnMain {...el} />

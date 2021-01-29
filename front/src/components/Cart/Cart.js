@@ -74,8 +74,8 @@ function Cart() {
       {placeholder}
       <FlatList style={styles.listOfItemsInCard} data={items} renderItem={renderItem} keyExtractor={item => item.productId} />
       <View style={styles.buttonBlock}>
-        <NavButton text='Clear' style={styles.grayBtn} onPress={() => setItems([])} />
-        <NavButton text='Order' style={styles.greenBtn} onPress={saveOrder} />
+        <NavButton text='Clear' style={styles.redbutton} onPress={() => setItems([])} />
+        <NavButton text='Order' style={styles.greenbutton} onPress={saveOrder} />
       </View>
     </View>
   )

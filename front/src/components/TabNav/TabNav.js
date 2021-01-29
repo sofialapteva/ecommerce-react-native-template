@@ -16,10 +16,10 @@ const AccountStackNav = createStackNavigator();
 
 function AccountStackNavScreen() {
   return (
-    <AccountStackNav.Navigator>
+    <AccountStackNav.Navigator headerStyle={{ height: 80, backgroundColor: 'blue' }}>
       <AccountStackNav.Screen name="Account" component={Account} />
       <AccountStackNav.Screen name="Auth" component={AuthForm} />
-    </AccountStackNav.Navigator>
+    </AccountStackNav.Navigator >
   );
 }
 

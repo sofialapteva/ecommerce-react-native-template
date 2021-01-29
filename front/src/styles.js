@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     width: '100%',
-    paddingHorizontal: 5
+    paddingHorizontal: 5,
+    marginTop: 10
   },
   itemInCart: {
     backgroundColor: 'rgba(95, 95, 95, 0.2)',
@@ -44,7 +45,8 @@ const styles = StyleSheet.create({
     height: '60%',
     width: '20%',
     borderRadius: 10,
-    margin: 10
+    margin: 10,
+    backgroundColor: 'gray'
   },
   iconCross: {
     alignSelf: 'flex-start',
@@ -54,21 +56,21 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     borderColor: 'black'
   },
-  greenBtn: {
+  greenbutton: {
     width: '33%',
     backgroundColor: 'green',
     height: 35,
     paddingVertical: 8,
     borderRadius: 5,
-    marginHorizontal: 1
+    margin: 2
   },
-  grayBtn: {
+  redbutton: {
     width: '33%',
     backgroundColor: 'red',
     height: 35,
     paddingTop: 8,
     borderRadius: 5,
-    marginHorizontal: 1
+    margin: 2
   },
   label: {
     fontSize: 18,
@@ -92,17 +94,23 @@ const styles = StyleSheet.create({
     fontSize: 17
   },
   largeText: {
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 3,
-    textAlign: 'center'
+    textAlign: 'center',
+    flex: 1,
+    flexWrap: 'wrap',
+    overflow: 'hidden'
   },
   crossedText: {
-    fontSize: 15,
+    fontSize: 13,
     textDecorationLine: 'line-through'
   },
   tabNav: {
     fontSize: 30
+  },
+  input: {
+    height: 30, borderColor: 'gray', borderWidth: 1, margin: 4, padding: 2
   }
 })
 
