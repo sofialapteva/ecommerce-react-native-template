@@ -50,6 +50,9 @@ export default function App() {
     </Provider>
   );
 }
+
+const Stack = createStackNavigator()
+</Stack.Navigator
 screenOptions={{
   headerTintColor: 'white',
   headerStyle: { backgroundColor: 'blue' },
