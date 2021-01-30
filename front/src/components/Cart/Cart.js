@@ -1,39 +1,42 @@
 import React from 'react'
 import { View, Text, Image, FlatList, Alert } from 'react-native'
 import { db } from '../../../firebase'
-
+import { useSelector, useDispatch } from 'react-redux'
 import Item from './Item'
 import NavButton from '../commonComponents/NavButton'
 import TopBar from '../TopBar/TopBar'
 
 import styles from '../../styles'
 
-function Cart() {
+function Cart({ navigation }) {
   const [items, setItems] = React.useState([]);
+  const store = useSelector(store => store)
+  const dispatch = useDispatch()
   const [placeholder, setPlaceholder] = React.useState(null);
   const renderItem = ({ item }) => (<Item item={item} removeItem={removeItem} />)
 
-  const fetchCart = async () => {
-    const cart = await db.collection('Carts').doc('penNAqCD0t2hZkcbMlJc').get();
-    console.log(cart.data())
-    const snapshot = await cart.data().Items;
-    console.log(snapshot)
-    let arr = []
-    snapshot.forEach(doc => {
-      arr.push({
-        productId: doc.productId,
-        uri: doc.uri,
-        productName: doc.productName,
-        oldPrice: doc.oldPrice,
-        price: doc.price,
-      })
-    });
-    setItems(arr)
+  async function fetchCart() {
+    if (store.cart.length) {
+      let itemsArr = []
+      store.cart.forEach(async id => {
+        const rawItem = await db.collection('Items').doc(id).get();
+        const doc = await rawItem.data()
+        await itemsArr.push({
+          id: id,
+          uri: doc.uri,
+          productName: doc.productName,
+          oldPrice: doc.oldPrice,
+          price: doc.price,
+        })
+        await setItems(itemsArr)
+      });
+    }
   }
 
   React.useEffect(() => {
+    console.log(store)
     fetchCart()
-  }, [])
+  }, [store.cart])
 
   React.useEffect(() => {
     if (items.length === 0) {
@@ -46,36 +49,49 @@ function Cart() {
       setPlaceholder(null)
     }
   }, [items])
-
-  const removeItem = (productId) => {
-    const filteredItems = items.filter(el => el.productId !== productId);
-    setItems(filteredItems)
+  function clearCart() {
+    setItems([]);
+    dispatch({ type: 'CLEAR_CART' })
+  }
+  const removeItem = (id) => {
+    const filteredItems = items.filter(el => el.id !== id);
+    dispatch({ type: 'REMOVE_FROM_CART', payload: id })
+    filteredItems ? setItems(filteredItems) : setItems([])
   }
 
   const saveOrder = async () => {
-    if (items.length > 0) {
-      Alert.alert('Make an order', 'Confirm you want to order this items?', [{
-        text: 'No'
-      },
-      {
-        text: 'Yes',
-        onPress: () => {
-          db.collection("Orders").add({ Items: items, user: 'BMA56Q9OO3EFAt683WOb' })
-          db.collection('Carts').doc('penNAqCD0t2hZkcbMlJc').delete()
-          setItems([])
-        }
-      }])
+    if (store.userId && store.cart.length) {
+      db.collection("Orders").add({ Items: items, user: store.userId })
+      setItems([])
+    } else if (store.cart.length) {
+      navigation.navigate('Account')
+    } else {
+      navigation.navigate('Main')
     }
+
+    //РАСКОММЕНТИРОВАТЬ
+    // if (items.length > 0) {
+    //   Alert.alert('Make an order', 'Confirm you want to order this items?', [{
+    //     text: 'No'
+    //   },
+    //   {
+    //     text: 'Yes',
+    //     onPress: () => {
+    //       db.collection("Orders").add({ Items: items, user: store.userId })
+    //       setItems([])
+    //     }
+    //   }])
+    // }
   }
 
   return (
-    <View style={styles.cart}>
+    <View style={styles.container}>
       <TopBar style={styles.navbar} tabName={'Cart'} />
       {placeholder}
-      <FlatList style={styles.listOfItemsInCard} data={items} renderItem={renderItem} keyExtractor={item => item.productId} />
+      <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.id} />
       <View style={styles.buttonBlock}>
-        <NavButton text='Clear' style={styles.grayBtn} onPress={() => setItems([])} />
-        <NavButton text='Order' style={styles.greenBtn} onPress={saveOrder} />
+        <NavButton text='Clear' style={styles.redbutton} onPress={clearCart} />
+        <NavButton text='Order' style={styles.greenbutton} onPress={saveOrder} />
       </View>
     </View>
   )
@@ -83,54 +99,3 @@ function Cart() {
 
 
 export default Cart
-
-
-// const itemsInCart = [{
-//   uri: 'https://reactnative.dev/img/tiny_logo.png',
-//   productName: 'React crash course',
-//   productId: '1Y23d45s61',
-//   oldPrice: '100$',
-//   price: '50$',
-// },
-// {
-//   uri: 'https://reactnative.dev/img/tiny_logo.png',
-//   productName: 'React crash course',
-//   productId: '1Y23d45s62',
-//   oldPrice: '100$',
-//   price: '50$',
-// },
-// {
-//   uri: 'https://reactnative.dev/img/tiny_logo.png',
-//   productName: 'React crash course',
-//   productId: '1Y23d45s63',
-//   oldPrice: '100$',
-//   price: '50$',
-// },
-// {
-//   uri: 'https://reactnative.dev/img/tiny_logo.png',
-//   productName: 'React crash course',
-//   productId: '1Y23d45s64',
-//   oldPrice: '100$',
-//   price: '50$',
-// },
-// {
-//   uri: 'https://reactnative.dev/img/tiny_logo.png',
-//   productName: 'React crash course',
-//   productId: '1Y23d45s65',
-//   oldPrice: '100$',
-//   price: '50$',
-// },
-// {
-//   uri: 'https://reactnative.dev/img/tiny_logo.png',
-//   productName: 'React crash course',
-//   productId: '1Y23d45s66',
-//   oldPrice: '100$',
-//   price: '50$',
-// },
-// {
-//   uri: 'https://reactnative.dev/img/tiny_logo.png',
-//   productName: 'React crash course',
-//   productId: '1Y23d45s67',
-//   oldPrice: '100$',
-//   price: '50$',
-// },]

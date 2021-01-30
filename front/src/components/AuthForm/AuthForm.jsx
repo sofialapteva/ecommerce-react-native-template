@@ -1,55 +1,66 @@
 import React, { useEffect } from "react";
-import { View, Button, TextInput } from "react-native";
+import { View, TextInput } from "react-native";
+import { useDispatch, useSelector } from 'react-redux'
 import { auth } from "../../../firebase";
-import { useDispatch } from 'react-redux'
-import { actionLogIn, actionRegister, actionLogOut } from '../../redux/store'
+import NavButton from '../commonComponents/NavButton'
+import styles from '../../styles'
+
 function AuthForm({ navigation }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  let store = useSelector(store => store)
   const dispatch = useDispatch()
   const loginHandler = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .catch((error) => alert(error))
-    const user = {
-      email: email,
-      password: password
-    }
-    dispatch(actionLogIn({ user }))
-    navigation.navigate('Cart')
+    auth.onAuthStateChanged(user => {
+      if (store.userId) {
+        dispatch({ type: "AUTH", payload: user.uid })
+        navigation.navigate('Main')
+      }
+    })
   };
+
   const registerHandler = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .catch((error) => alert(error))
-    const user = {
-      email: email,
-      password: password
-    }
-    dispatch(actionRegister({ user }))
-    navigation.navigate('Main')
+    auth.onAuthStateChanged(user => {
+      if (store.userId) {
+        dispatch({ type: "AUTH", payload: user.uid })
+        navigation.navigate('Main')
+      }
+    })
+
   };
+
   const logOutHandler = () => {
     auth.signOut()
-    dispatch(actionLogOut({ email, password }))
+    dispatch({ type: "LOG_OUT" })
     navigation.navigate('Main')
   }
+
   useEffect(() => {
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged(async user => {
       if (user) {
-        console.log('user logged in', user)
+        await dispatch({ type: "AUTH", payload: user.uid })
+        console.log('user logged in', user.uid, store)
       } else {
-        console.log('user loged out', user)
+        console.log('user logged out')
       }
     })
   }, [])
   return (
     <View>
-      <TextInput onChangeText={(text) => setEmail(text)} />
-      <TextInput onChangeText={(text) => setPassword(text)} />
-      <Button title="SignIn" onPress={loginHandler} />
-      <Button title="SignUp" onPress={registerHandler} />
-      <Button title="SignOut" onPress={logOutHandler} />
+      {store.userId ? (<NavButton text="SignOut" style={styles.redbutton} onPress={logOutHandler} />) : (<>
+        <TextInput onChangeText={(text) => setEmail(text)} style={styles.input} />
+        <TextInput onChangeText={(text) => setPassword(text)} style={styles.input} />
+        <View style={styles.buttonBlock}>
+          <NavButton text="Login" style={styles.greenbutton} onPress={loginHandler} />
+          <NavButton text="Register" style={styles.greenbutton} onPress={registerHandler} />
+        </View>
+      </>)}
     </View>
   );
 }
