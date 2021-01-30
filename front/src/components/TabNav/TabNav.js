@@ -1,5 +1,5 @@
 import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AntDesign } from '@expo/vector-icons';
 import { useSelector } from 'react-redux'
@@ -12,7 +12,7 @@ import Account from '../Account/Account'
 import AuthForm from '../AuthForm/AuthForm'
 
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const AccountStackNav = createStackNavigator();
 
@@ -21,7 +21,7 @@ function AccountStackNavScreen() {
     <AccountStackNav.Navigator headerStyle={{ height: 80, backgroundColor: 'blue' }}>
       <AccountStackNav.Screen name="Account" component={Account} />
       <AccountStackNav.Screen name="Auth" component={AuthForm} />
-    </AccountStackNav.Navigator >
+    </AccountStackNav.Navigator>
   );
 }
 
@@ -29,11 +29,16 @@ export default function TabNav() {
   const dispatch = useDispatch()
   React.useEffect(() => {
     auth.onAuthStateChanged(async user => {
-      dispatch({ type: "AUTH", payload: user.uid })
+      if (user?.uid) {
+        console.log(user)
+        dispatch({ type: "AUTH", payload: user.uid })
+      } else {
+        console.log(user)
+        dispatch({ type: "AUTH", payload: '' })
+      }
     })
   }, [])
   const itemsInCart = useSelector(({ cart }) => cart.length)
-  let currentRoute = 'Main'
   return (
     <Tab.Navigator screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size = 24 }) => {
@@ -50,11 +55,7 @@ export default function TabNav() {
         return <AntDesign name={iconName} size={size} color={color} />;
       },
     })}
-
-      tabBarOptions={{
-        activeTintColor: 'blue',
-        inactiveTintColor: 'gray',
-      }}
+      initialRouteName="Main"
     >
       <Tab.Screen name="Menu" component={Menu} />
       <Tab.Screen name="Main" component={Main} />

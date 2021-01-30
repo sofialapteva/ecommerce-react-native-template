@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
-import styles from '../../styles'
 import tailwind from 'tailwind-rn'
 import Entypo from 'react-native-vector-icons/Entypo'
-function ItemOnMain({ id, oldPrice, price, tags, productName, uri, addItemToCart }) {
+import { useDispatch } from 'react-redux'
+function ItemOnMain({ id, oldPrice, price, tags, productName, uri }) {
+  const dispatch = useDispatch()
   return (
     <View style={tailwind('h-32 border-2 border-gray-200 flex-row flex justify-between')}>
       <View>
@@ -16,7 +17,7 @@ function ItemOnMain({ id, oldPrice, price, tags, productName, uri, addItemToCart
         <Text style={tailwind('text-sm line-through')}>{oldPrice}</Text>
         <Text style={tailwind('text-sm font-bold')}>{price}</Text>
       </View>
-      <Entypo name="shopping-cart" size={24} color="gray" style={tailwind('p-2 self-center')} onPress={() => addItemToCart(id)} />
+      <Entypo name="shopping-cart" size={24} color="gray" style={tailwind('p-2 self-center')} onPress={() => dispatch({ type: "ADD_TO_CART", payload: id })} />
     </View>
   )
 }
