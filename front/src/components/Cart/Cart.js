@@ -61,34 +61,31 @@ function Cart({ navigation }) {
 
   const saveOrder = async () => {
     if (store.userId && store.cart.length) {
-      db.collection("Orders").add({ Items: items, user: store.userId })
-      setItems([])
+      if (items.length > 0) {
+        Alert.alert('Make an order', 'Confirm you want to order this items?', [{
+          text: 'No'
+        },
+        {
+          text: 'Yes',
+          onPress: () => {
+            setItems([])
+            db.collection("Orders").add({ Items: items, user: store.userId })
+            dispatch({ type: 'CLEAR_CART' })
+          }
+        }])
+      }
     } else if (store.cart.length) {
       navigation.navigate('Account')
     } else {
       navigation.navigate('Main')
     }
-
-    //РАСКОММЕНТИРОВАТЬ
-    // if (items.length > 0) {
-    //   Alert.alert('Make an order', 'Confirm you want to order this items?', [{
-    //     text: 'No'
-    //   },
-    //   {
-    //     text: 'Yes',
-    //     onPress: () => {
-    //       db.collection("Orders").add({ Items: items, user: store.userId })
-    //       setItems([])
-    //     }
-    //   }])
-    // }
   }
 
   return (
     <View style={styles.container}>
       <TopBar style={styles.navbar} tabName={'Cart'} />
       {placeholder}
-      <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.id} />
+      <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.id + Math.random().toString()} />
       <View style={styles.buttonBlock}>
         <NavButton text='Clear' style={styles.redbutton} onPress={clearCart} />
         <NavButton text='Order' style={styles.greenbutton} onPress={saveOrder} />
