@@ -6,16 +6,11 @@ const styles = StyleSheet.create({
     borderTopColor: 'black',
     borderTopWidth: 25
   },
-  cart: {
-    height: '93%',
-    width: '100%',
-  },
-  listOfItemsInCard: {
-    height: 250,
-    width: '100%',
+  container: {
+    flex: 1,
   },
   buttonBlock: {
-    height: '15%',
+    height: '10%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -117,6 +112,6 @@ const styles = StyleSheet.create({
 export default styles
 
 export const stylesTailwind = {
-  menuItem: 'h-20 w-full rounded-xl bg-gray-300 py-6 flex flex-row justify-around mb-2',
+  menuItem: 'h-20 uppercase w-full rounded-xl bg-gray-300 pl-10 py-6 flex flex-row mb-2',
   menuText: 'text-xl font-bold text-center',
 }
