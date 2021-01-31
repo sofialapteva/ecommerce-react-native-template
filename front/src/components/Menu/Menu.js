@@ -39,7 +39,7 @@ function Menu({ navigation }) {
       <View style={tailwind('p-5')}>
         <FlatList data={tags} renderItem={renderItem} keyExtractor={item => tags.indexOf(item).toString()} />
       </View>
-
+      {tags.forEach(el => console.log(el))}
     </View>
   )
 }
