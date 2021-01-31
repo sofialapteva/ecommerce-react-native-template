@@ -1,6 +1,5 @@
 import React from 'react'
 import { View } from 'react-native'
-import { TextInput } from 'react-native-gesture-handler'
 import styles from '../../styles'
 import NavButton from '../commonComponents/NavButton'
 function Account({ navigation }) {

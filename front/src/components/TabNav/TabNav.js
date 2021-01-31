@@ -9,6 +9,7 @@ import Menu from '../Menu/Menu'
 import Main from '../Main/Main'
 import Account from '../Account/Account'
 import AuthForm from '../AuthForm/AuthForm'
+
 import CMS from '../CMS/CMS.js'
 import DeleteItems from '../CMS/DeleteItems'
 import Statistics from '../CMS/Statistics'
@@ -17,6 +18,7 @@ import AddItem from '../CMS/AddItem'
 const Tab = createMaterialBottomTabNavigator();
 
 const AccountStackNav = createStackNavigator();
+const CMSNav = createStackNavigator();
 
 function AccountStackNavScreen() {
   return (
@@ -29,11 +31,12 @@ function AccountStackNavScreen() {
 
 function CMSNavScreen() {
   return (
-    <CMSNavScreen.Navigator headerStyle={{ height: 80, backgroundColor: 'blue' }}>
-      <CMSNavScreen.Screen name="DeleteItems" component={DeleteItems} />
-      <CMSNavScreen.Screen name="Statistics" component={Statistics} />
-      <CMSNavScreen.Screen name="AddItem" component={AddItem} />
-    </CMSNavScreen.Navigator>
+    <CMSNav.Navigator headerStyle={{ height: 80, backgroundColor: 'blue' }}>
+      <CMSNav.Screen name="CMS" component={CMS} />
+      <CMSNav.Screen name="DeleteItems" component={DeleteItems} />
+      <CMSNav.Screen name="Statistics" component={Statistics} />
+      <CMSNav.Screen name="AddItem" component={AddItem} />
+    </CMSNav.Navigator>
   );
 }
 
@@ -76,7 +79,7 @@ export default function TabNav() {
       <Tab.Screen name="Main" component={Main} />
       <Tab.Screen name="Account" component={AccountStackNavScreen} />
       {itemsInCart ? <Tab.Screen name="Cart" component={Cart} options={{ tabBarBadge: itemsInCart }} /> : <Tab.Screen name="Cart" component={Cart} />}
-      {store.userId == 'Z37MWnBGmodW6wfdFnCxpYFK3Jl1' ? (<Tab.Screen name='CMS' component={CMS} />) : (<></>)
+      {store.userId == 'Z37MWnBGmodW6wfdFnCxpYFK3Jl1' ? (<Tab.Screen name='CMS' component={CMSNavScreen} />) : (<></>)
       }
     </Tab.Navigator>
   );

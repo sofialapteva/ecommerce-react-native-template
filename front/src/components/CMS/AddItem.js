@@ -12,16 +12,7 @@ import {
 } from 'react-native';
 
 
-const options = {
-  title: 'Select Avatar',
-  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
-  storageOptions: {
-    skipBackup: true,
-    path: 'images',
-  },
-};
-
-export default class AddItem extends Component {
+class AddItem extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -34,7 +25,7 @@ export default class AddItem extends Component {
     }
   }
 
-  chooseImage = () => {
+  chooseImage = (event) => {
     let options = {
       title: 'Select Image',
       customButtons: [
@@ -68,7 +59,7 @@ export default class AddItem extends Component {
     });
   }
 
-  launchCamera = () => {
+  launchCamera = (event) => {
     let options = {
       storageOptions: {
         skipBackup: true,
@@ -156,10 +147,8 @@ export default class AddItem extends Component {
   render() {
     return (
       <Fragment>
-        <StatusBar barStyle="dark-content" />
         <SafeAreaView>
           <View style={styles.body}>
-            <Text style={{ textAlign: 'center', fontSize: 20, paddingBottom: 10 }} >Pick Images from Camera & Gallery</Text>
             <View style={styles.ImageSections}>
               <View>
                 {this.renderFileData()}
@@ -202,14 +191,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderColor: 'black',
     borderWidth: 1,
-    height: Dimensions.get('screen').height - 20,
+    height: Dimensions.get('screen').height - 50,
     width: Dimensions.get('screen').width
   },
   ImageSections: {
     display: 'flex',
     flexDirection: 'row',
     paddingHorizontal: 8,
-    paddingVertical: 8,
+    paddingVertical: 4,
     justifyContent: 'center'
   },
   images: {
@@ -239,3 +228,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 });
+
+export default AddItem
