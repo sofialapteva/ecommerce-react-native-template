@@ -21,8 +21,8 @@ function Menu({ navigation }) {
   }
 
   function setFilter(item) {
-    navigation.navigate('Main')
     dispatch({ type: 'SET_TAG', payload: item })
+    navigation.navigate('Main')
   }
 
   React.useEffect(() => {
