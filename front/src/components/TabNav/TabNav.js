@@ -11,9 +11,10 @@ import Account from '../Account/Account'
 import AuthForm from '../AuthForm/AuthForm'
 
 import CMS from '../CMS/CMS.js'
-import DeleteItems from '../CMS/DeleteItems'
+import EditItems from '../CMS/EditItems'
 import Statistics from '../CMS/Statistics'
 import AddItem from '../CMS/AddItem'
+import Orders from '../CMS/Orders'
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -33,9 +34,10 @@ function CMSNavScreen() {
   return (
     <CMSNav.Navigator headerStyle={{ height: 80, backgroundColor: 'blue' }}>
       <CMSNav.Screen name="CMS" component={CMS} />
-      <CMSNav.Screen name="DeleteItems" component={DeleteItems} />
+      <CMSNav.Screen name="EditItems" component={EditItems} />
       <CMSNav.Screen name="Statistics" component={Statistics} />
       <CMSNav.Screen name="AddItem" component={AddItem} />
+      <CMSNav.Screen name="Orders" component={Orders} />
     </CMSNav.Navigator>
   );
 }

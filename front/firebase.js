@@ -8,6 +8,7 @@ import "firebase/firestore";
 //import "firebase/storage";
 
 // Initialize Firebase
+
 const firebaseConfig = {
   apiKey: "AIzaSyC4v9TjUSFFPxjFhQV3rafhjYjBbvTilXs",
   authDomain: "constructor-of-internet-shop.firebaseapp.com",

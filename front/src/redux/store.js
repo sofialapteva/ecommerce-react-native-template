@@ -6,7 +6,8 @@ const initState = {
   userId: "",
   cart: [],
   filterTag: '',
-  reduxItems: []
+  reduxItems: [],
+  reduxOrders: []
 };
 
 export const store = createStore(reducer, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
@@ -43,6 +44,21 @@ export const thunkGetItems = (filterTag = '') => {
   }
 }
 
+export const thunkGetOrders = () => {
+  return async (dispatch) => {
+    db.collection("Orders").get().then((data) => {
+      let arr = []
+      data.forEach((doc) => {
+        const details = doc.data()
+        arr.push({
+          user: details.user,
+          items: details.items,
+        })
+      });
+      dispatch({ type: 'GET_ORDERS', payload: arr })
+    })
+  }
+}
 
 function reducer(state = initState, action) {
   if (action.type === "AUTH") {
@@ -64,6 +80,8 @@ function reducer(state = initState, action) {
     return { ...state, filterTag: tag }
   } else if (action.type === 'SET_ITEMS') {
     return { ...state, reduxItems: action.payload }
+  } else if (action.type === 'GET_ORDERS') {
+    return { ...state, reduxOrders: action.payload }
   }
   return state;
 };
