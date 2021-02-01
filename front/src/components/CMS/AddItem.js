@@ -8,6 +8,7 @@ import styles from "../../styles";
 import WebcamCapture from "./WebcamCapture";
 import { thunkGetItems } from '../../redux/store'
 import { useDispatch } from 'react-redux'
+
 function AddItem() {
   const dispatch = useDispatch()
   const name = useRef(null);
@@ -39,6 +40,7 @@ function AddItem() {
     image.current.value = "";
     tags.current.value = "";
   };
+
   const addImage = () => {
     <WebcamCapture />;
   };

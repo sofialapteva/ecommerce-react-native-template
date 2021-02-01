@@ -8,7 +8,6 @@ const videoConstraints = {
   height: 300,
   facingMode: "user",
 };
-
 function WebcamCapture() {
   const [image, setImage] = useState(null);
   const webcamRef = useRef(null);
@@ -31,7 +30,6 @@ function WebcamCapture() {
         source={{ uri: image }}
       />
 
-      {/* <Image src={newImage} alt=''/> */}
       <Webcam
         audio={false}
         height={videoConstraints.height}
