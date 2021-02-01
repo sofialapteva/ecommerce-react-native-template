@@ -4,6 +4,7 @@ import { db } from '../../firebase'
 
 const initState = {
   userId: "",
+  userData: {},
   cart: [],
   filterTag: '',
   reduxItems: [],
@@ -60,6 +61,15 @@ export const thunkGetOrders = () => {
   }
 }
 
+export const thunkGetUser = (userId) => {
+  return async (dispatch) => {
+    db.collection("Users").get().then((data) => {
+      dispatch({ type: 'SET_USER_DATA', payload: data })
+    })
+  }
+}
+
+
 function reducer(state = initState, action) {
   if (action.type === "AUTH") {
     return {
@@ -82,6 +92,8 @@ function reducer(state = initState, action) {
     return { ...state, reduxItems: action.payload }
   } else if (action.type === 'GET_ORDERS') {
     return { ...state, reduxOrders: action.payload }
+  } else if (action.type === 'SET_USER_DATA') {
+    return { ...state, userData: action.payload }
   }
   return state;
 };

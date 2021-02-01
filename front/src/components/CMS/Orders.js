@@ -1,12 +1,11 @@
 import React from 'react'
 import { View, FlatList, Alert } from 'react-native'
-import { db } from '../../../firebase'
 import { thunkGetOrders } from '../../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import OrderDetails from './OrderDetails'
 function Orders() {
   const dispatch = useDispatch()
-  const state = useSelector(state => state)
+  const store = useSelector(store => store)
 
   React.useEffect(() => {
     dispatch(thunkGetOrders())
@@ -16,9 +15,9 @@ function Orders() {
   return (
     <View style={{ flex: 1 }}>
       <FlatList
-        data={items}
+        data={store.reduxOrders}
         renderItem={renderItem}
-        keyExtractor={item => new Date().getMilliseconds() + Math.random * 100} />
+        keyExtractor={i => new Date().getMilliseconds() + Math.random * 100} />
     </View>
   )
 }
