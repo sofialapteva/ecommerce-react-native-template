@@ -1,18 +1,47 @@
-import { act } from 'react-test-renderer';
-import { createStore } from 'redux'
+import { applyMiddleware, createStore, compose } from 'redux'
+import thunk from 'redux-thunk'
+import { db } from '../../firebase'
+
 const initState = {
   userId: "",
   cart: [],
-  filterTag: ''
+  filterTag: '',
+  reduxItems: []
 };
 
-export const store = createStore(reducer);
+export const store = createStore(reducer, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
 
-export const actionLogOut = () => {
-  return {
-    type: "LOG_OUT",
-  };
-};
+export const thunkGetItems = (filterTag = '') => {
+  return async (dispatch) => {
+    db.collection("Items").get().then((data) => {
+      let arr = []
+      data.forEach((doc) => {
+        const details = doc.data()
+        if (filterTag !== '') {
+          details.tags.includes(filterTag) ?
+            arr.push({
+              id: doc.id,
+              oldPrice: details.oldPrice,
+              price: details.price,
+              productName: details.productName,
+              tags: details.tags,
+              uri: details.uri
+            }) : ''
+        } else {
+          arr.push({
+            id: doc.id,
+            oldPrice: details.oldPrice,
+            price: details.price,
+            productName: details.productName,
+            tags: details.tags,
+            uri: details.uri
+          })
+        }
+      });
+      dispatch({ type: 'SET_ITEMS', payload: arr })
+    })
+  }
+}
 
 
 function reducer(state = initState, action) {
@@ -33,6 +62,8 @@ function reducer(state = initState, action) {
   } else if (action.type === "SET_TAG") {
     const tag = (action.payload === 'Everything') ? '' : action.payload
     return { ...state, filterTag: tag }
+  } else if (action.type === 'SET_ITEMS') {
+    return { ...state, reduxItems: action.payload }
   }
   return state;
 };

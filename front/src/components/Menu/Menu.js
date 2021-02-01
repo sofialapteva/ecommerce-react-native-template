@@ -1,11 +1,11 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, FlatList } from 'react-native'
 import TopBar from '../TopBar/TopBar'
-import styles from '../../styles'
+import { thunkGetItems } from '../../redux/store'
+import styles, { stylesTailwind } from '../../styles'
 import tailwind from 'tailwind-rn';
 import { db } from '../../../firebase'
 import { FontAwesome5 } from '@expo/vector-icons';
-import { stylesTailwind } from '../../styles'
 import { useDispatch } from 'react-redux'
 function Menu({ navigation }) {
   const [tags, setTags] = React.useState([])
@@ -22,6 +22,7 @@ function Menu({ navigation }) {
 
   function setFilter(item) {
     dispatch({ type: 'SET_TAG', payload: item })
+    dispatch(thunkGetItems(item))
     navigation.navigate('Main')
   }
 

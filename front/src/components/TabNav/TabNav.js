@@ -46,10 +46,8 @@ export default function TabNav() {
   React.useEffect(() => {
     auth.onAuthStateChanged(async user => {
       if (user?.uid) {
-        console.log(user)
         dispatch({ type: "AUTH", payload: user.uid })
       } else {
-        console.log(user)
         dispatch({ type: "AUTH", payload: '' })
       }
     })
