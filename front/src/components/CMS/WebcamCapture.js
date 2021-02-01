@@ -1,10 +1,8 @@
 import React, { useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import styles from "../../styles";
-// import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-// import AdjustIcon from '@material-ui/icons/Adjust';
-import NavButton from '../commonComponents/NavButton';
-import {View, Image} from 'react-native';
+import NavButton from "../commonComponents/NavButton";
+import { View, Image } from "react-native";
 const videoConstraints = {
   width: 300,
   height: 300,
@@ -12,25 +10,28 @@ const videoConstraints = {
 };
 
 function WebcamCapture() {
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState(null);
   const webcamRef = useRef(null);
 
-
-const photo =() => {
-  const imageSrc = webcamRef.current.getScreenshot();
-console.log(imageSrc)
-setImage(imageSrc)
-}
-
-const capture = useCallback(() => {
-const imageSrc = webcamRef.current.getScreenshot();
-console.log(imageSrc)
-setImage(imageSrc)
-},[webcamRef])
+  const capture = useCallback(() => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    console.log(imageSrc);
+    setImage(imageSrc);
+  }, [webcamRef]);
 
   return (
     <View>
-      <Image src={image} alt=''/>
+      <Image
+        style={{
+          width: 100,
+          height: 150,
+          borderWidth: 1,
+          borderColor: "red",
+        }}
+        source={{ uri: image }}
+      />
+
+      {/* <Image src={newImage} alt=''/> */}
       <Webcam
         audio={false}
         height={videoConstraints.height}
@@ -39,7 +40,7 @@ setImage(imageSrc)
         width={videoConstraints.width}
         videoConstraints={videoConstraints}
       />
-      <NavButton text='click!' style={styles.greenbutton} onPress={capture}/>
+      <NavButton text="click!" style={styles.greenbutton} onPress={capture} />
     </View>
   );
 }
