@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     paddingHorizontal: 5,
-    marginTop: 10
+    marginVertical: 5
   },
   itemInCart: {
     backgroundColor: 'rgba(95, 95, 95, 0.2)',

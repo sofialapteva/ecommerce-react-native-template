@@ -1,51 +1,25 @@
 import React from 'react'
-import { View, FlatList, Button, Alert } from 'react-native'
+import { View, FlatList, Alert } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { db } from '../../../firebase'
-
+import { thunkGetItems } from '../../redux/store'
 import TopBar from '../TopBar/TopBar'
 import styles from '../../styles'
 import ItemOnMain from './ItemOnMain'
 import { TextInput } from 'react-native-gesture-handler'
 
 function Main() {
-  const [items, setItems] = React.useState([])
+
+  const [items, setItems] = React.useState(reduxItems)
   const [text, setText] = React.useState('')
   const filterTag = useSelector(({ filterTag }) => filterTag)
+  const reduxItems = useSelector(({ reduxItems }) => reduxItems)
+  const dispatch = useDispatch()
 
   React.useEffect(() => {
-    fetchItems()
-  }, [filterTag])
+    dispatch(thunkGetItems(filterTag))
+    setItems(reduxItems)
+  }, [reduxItems])
 
-  function fetchItems() {
-    setItems([])
-    db.collection("Items").get().then((data) => {
-      data.forEach((doc) => {
-        const details = doc.data()
-        if (filterTag !== '') {
-          details.tags.includes(filterTag) ?
-            setItems((pre =>
-              [...pre, {
-                id: doc.id,
-                oldPrice: details.oldPrice,
-                price: details.price,
-                productName: details.productName,
-                tags: details.tags,
-                uri: details.uri
-              }])) : ''
-        } else {
-          setItems((pre => [...pre, {
-            id: doc.id,
-            oldPrice: details.oldPrice,
-            price: details.price,
-            productName: details.productName,
-            tags: details.tags,
-            uri: details.uri
-          }]))
-        }
-      });
-    })
-  }
 
   function renderItem({ item }) {
     return <ItemOnMain {...item} />
