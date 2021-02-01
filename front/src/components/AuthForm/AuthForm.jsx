@@ -53,7 +53,7 @@ function AuthForm({ navigation }) {
   }, [])
   return (
     <View>
-      {store.userId ? (<NavButton text="SignOut" style={styles.redbutton} onPress={logOutHandler} />) : (<>
+      {store.userId ? (<NavButton text="Confirm logout" style={styles.redbutton} onPress={logOutHandler} />) : (<>
         <TextInput onChangeText={(text) => setEmail(text)} style={styles.input} placeholder='login' />
         <TextInput secureTextEntry={true} onChangeText={(text) => setPassword(text)} style={styles.input} placeholder='password' />
         <View style={styles.buttonBlock}>
