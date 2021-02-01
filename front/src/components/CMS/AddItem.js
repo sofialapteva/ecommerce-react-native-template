@@ -4,6 +4,7 @@ import { db } from "../../../firebase";
 import NavButton from "../commonComponents/NavButton";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "../../styles";
+import WebcamCapture from "./WebcamCapture";
 import { thunkGetItems } from '../../redux/store'
 import { useDispatch } from 'react-redux'
 function AddItem() {
@@ -20,7 +21,7 @@ function AddItem() {
         price: +price.current.value,
         oldPrice: +price.current.value,
         uri: image.current.value,
-        tags: tags.current.value.trim().split(' ').filter(el => el !== '' && el !== ' ')
+              tags: tags.current.value.trim().split(' ').filter(el => el !== '' && el !== ' ')
       })
     dispatch(thunkGetItems())
     name.current.value = ''
@@ -28,20 +29,21 @@ function AddItem() {
     image.current.value = ''
     tags.current.value = ''
   };
-
+  
+    const addImage = () => {
+   <WebcamCapture />;
+  };
   return (
     <View style={styles.container}>
       <View style={styles.addItem}>
-        <TextInput ref={name} style={styles.input} placeholder="name" required />
-        <TextInput ref={price} style={styles.input} placeholder="price" required />
-        <TextInput ref={image} style={styles.input} placeholder="image" required />
-        <TextInput ref={tags} style={styles.input} placeholder="tags" required />
+        <TextInput ref={name} style={styles.input} placeholder="name" />
+        <TextInput ref={price} style={styles.input} placeholder="price" />
+        <TextInput ref={image} style={styles.input} placeholder="image" />
+        <NavButton text="photo" style={styles.greenbutton} onClick={addImage} />
+        <TextInput ref={tags} style={styles.input} placeholder="tags" />
       </View>
-      <NavButton
-        text="Add item"
-        style={styles.greenbutton}
-        onPress={addItem}
-      />
+      <NavButton text="Add item" style={styles.greenbutton} onPress={addItem} />
+      <WebcamCapture />
     </View>
   );
 }
