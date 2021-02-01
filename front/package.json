@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-firebase/app": "^10.5.0",
     "@react-native-firebase/auth": "^10.5.1",
@@ -36,6 +37,7 @@
     "react-native-unimodules": "~0.12.0",
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.2",
+    "react-webcam": "^5.2.2",
     "redux": "^4.0.5",
     "tailwind-rn": "^3.0.0"
   },

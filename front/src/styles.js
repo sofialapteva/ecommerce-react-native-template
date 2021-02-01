@@ -106,7 +106,10 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 30, borderColor: 'gray', borderWidth: 1, margin: 4, padding: 2
-  }
+  },
+  addItem: {
+  //  width: 100,
+  } 
 })
 
 export default styles

@@ -5,6 +5,9 @@ import NavButton from "../commonComponents/NavButton";
 import { TextInput } from "react-native-gesture-handler";
 import { useRef } from "react";
 import styles from "../../styles";
+import WebcamCapture from "./WebcamCapture";
+
+
 function AddItem() {
   const name = useRef(null);
   const price = useRef(null);
@@ -22,7 +25,7 @@ function AddItem() {
         price: price.current.value,
         oldPrice: price.current.value,
         uri: image.current.value,
-        tags: tags.current.value.trim().split(' ')
+        tags: tags.current.value.trim().split(" "),
       })
       .then(function () {
         console.log("Document successfully written!");
@@ -31,10 +34,14 @@ function AddItem() {
         console.error("Error writing document: ", error);
       });
 
-    name.current.value = ''
-    price.current.value = ''
-    image.current.value = ''
-    tags.current.value = ''
+    name.current.value = "";
+    price.current.value = "";
+    image.current.value = "";
+    tags.current.value = "";
+  };
+
+  const addImage = () => {
+   <WebcamCapture />;
   };
 
   return (
@@ -43,13 +50,11 @@ function AddItem() {
         <TextInput ref={name} style={styles.input} placeholder="name" />
         <TextInput ref={price} style={styles.input} placeholder="price" />
         <TextInput ref={image} style={styles.input} placeholder="image" />
+        <NavButton text="photo" style={styles.greenbutton} onClick={addImage} />
         <TextInput ref={tags} style={styles.input} placeholder="tags" />
       </View>
-      <NavButton
-        text="Add item"
-        style={styles.greenbutton}
-        onPress={addItem}
-      />
+      <NavButton text="Add item" style={styles.greenbutton} onPress={addItem} />
+      <WebcamCapture />
     </View>
   );
 }
