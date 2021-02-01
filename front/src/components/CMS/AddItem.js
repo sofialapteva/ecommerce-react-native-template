@@ -15,7 +15,6 @@ function AddItem() {
   const price = useRef(null);
   const image = useRef(null);
   const tags = useRef(null);
-
   const addItem = () => {
     console.log(name.current.value);
     console.log(price.current.value);
@@ -41,6 +40,7 @@ function AddItem() {
     image.current.value = "";
     tags.current.value = "";
   };
+
   const addImage = () => {
     <WebcamCapture />;
   };

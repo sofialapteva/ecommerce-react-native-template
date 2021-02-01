@@ -5,16 +5,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import Item from './Item'
 import NavButton from '../commonComponents/NavButton'
 import TopBar from '../TopBar/TopBar'
-
 import styles from '../../styles'
-
 function Cart({ navigation }) {
   const [items, setItems] = React.useState([]);
   const store = useSelector(store => store)
   const dispatch = useDispatch()
   const [placeholder, setPlaceholder] = React.useState(null);
   const renderItem = ({ item }) => (<Item item={item} removeItem={removeItem} />)
-
   async function fetchCart() {
     if (store.cart.length) {
       let itemsArr = []
@@ -32,12 +29,10 @@ function Cart({ navigation }) {
       });
     }
   }
-
   React.useEffect(() => {
     console.log(store)
     fetchCart()
   }, [store.cart])
-
   React.useEffect(() => {
     if (items.length === 0) {
       setPlaceholder(<View>
@@ -58,7 +53,6 @@ function Cart({ navigation }) {
     dispatch({ type: 'REMOVE_FROM_CART', payload: id })
     filteredItems ? setItems(filteredItems) : setItems([])
   }
-
   const saveOrder = async () => {
     if (store.userId && store.cart.length) {
       if (items.length > 0) {
@@ -80,7 +74,6 @@ function Cart({ navigation }) {
       navigation.navigate('Main')
     }
   }
-
   return (
     <View style={styles.container}>
       <TopBar style={styles.navbar} tabName={'Cart'} />
@@ -93,6 +86,4 @@ function Cart({ navigation }) {
     </View>
   )
 }
-
-
 export default Cart
