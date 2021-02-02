@@ -63,8 +63,9 @@ export const thunkGetOrders = () => {
 
 export const thunkGetUser = (userId) => {
   return async (dispatch) => {
-    db.collection("Users").get().then((data) => {
-      dispatch({ type: 'SET_USER_DATA', payload: data })
+    const userData = db.collection("Users").doc(userId)
+    userData.get().then((doc) => {
+      dispatch({ type: 'SET_USER_DATA', payload: doc.data() || {} })
     })
   }
 }

@@ -1,48 +1,63 @@
 import React, { useRef } from 'react'
-import { View, TextInput } from 'react-native'
+import { View, TextInput, Text } from 'react-native'
 import styles from '../../styles'
 import NavButton from '../commonComponents/NavButton'
 import { useSelector } from 'react-redux'
 import { db } from '../../../firebase'
+import { useDispatch } from 'react-redux'
+import { thunkGetUser } from '../../redux/store'
+
 function Account({ navigation }) {
   const store = useSelector(store => store)
+  const dispatch = useDispatch()
   const userName = useRef('')
   const userSurname = useRef('')
   const userCity = useRef('')
   const userStreet = useRef('')
   const userApartment = useRef('')
+  React.useEffect(() => {
+    if (store.userId) {
+      dispatch(thunkGetUser(store.userId))
+    }
+  }, [store.userData])
+
   function saveInfoHandler() {
-    db.collection('Users').doc(store.userId).set({
-      name: userName.current.value,
-      surname: userSurname.current.value,
-      city: userCity.current.value,
-      street: userStreet.current.value,
-      apartment: userApartment.current.value,
-    })
-    navigation.navigate('Main')
+    if (store.userId) {
+      db.collection('Users').doc(store.userId).set({
+        name: userName.current.value,
+        surname: userSurname.current.value,
+        city: userCity.current.value,
+        street: userStreet.current.value,
+        apartment: userApartment.current.value,
+      })
+      navigation.navigate('Main')
+    } else {
+      navigation.navigate('Auth')
+    }
   }
 
   return (
     <View>
       {store.userId ? <NavButton style={styles.redbutton} text='Logout' onPress={() => navigation.navigate('Auth')} /> : <NavButton style={styles.greenbutton} text='Login' onPress={() => navigation.navigate('Auth')} />}
-      {store.userData === {} ?
+      {store.userData.name ?
         <View>
-          <Text>{store.userData.name}</Text>
-          <Text>{store.userData.surname}</Text>
-          <Text>{store.userData.city}</Text>
-          <Text>{store.userData.street}</Text>
-          <Text>{store.userData.apartment}</Text>
-        </View> :
+          <Text style={styles.largeText}>Your name: {store.userData.name}</Text>
+          <Text style={styles.largeText}>Your surname: {store.userData.surname}</Text>
+          <Text style={styles.largeText}>Address of delivery:</Text>
+          <Text style={styles.largeText}>Your city: {store.userData.city}</Text>
+          <Text style={styles.largeText}>Your street: {store.userData.street}</Text>
+          <Text style={styles.largeText}>Your apartment:{store.userData.apartment}</Text>
+        </View> : <></>}
+      {store.userId && !store.userData.name ?
         <View>
-          <TextInput ref={userName} style={styles.input} placeholder='Name' />
-          <TextInput ref={userSurname} style={styles.input} placeholder='Surname' />
-          <TextInput ref={userCity} style={styles.input} placeholder='City' />
-          <TextInput ref={userStreet} style={styles.input} placeholder='Street' />
-          <TextInput ref={userApartment} style={styles.input} placeholder='Apartment' />
+          <TextInput ref={userName} style={styles.input} placeholder='Name' required />
+          <TextInput ref={userSurname} style={styles.input} placeholder='Surname' required />
+          <TextInput ref={userCity} style={styles.input} placeholder='City' required />
+          <TextInput ref={userStreet} style={styles.input} placeholder='Street' required />
+          <TextInput ref={userApartment} style={styles.input} placeholder='Apartment' required />
           <NavButton style={styles.greenbutton}
-            text='Save information' onPress={saveInfoHandler} />
-        </View>
-      }
+            text='Save' onPress={saveInfoHandler} />
+        </View> : <></>}
     </View>
   )
 }
