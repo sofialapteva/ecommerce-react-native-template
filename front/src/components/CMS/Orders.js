@@ -3,23 +3,32 @@ import { View, FlatList, Alert } from 'react-native'
 import { thunkGetOrders } from '../../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import OrderDetails from './OrderDetails'
+
 function Orders() {
   const dispatch = useDispatch()
-  const store = useSelector(store => store)
+  const reduxOrders = useSelector(({ reduxOrders }) => reduxOrders)
+  function completeHandler() {
+
+  }
 
   React.useEffect(() => {
     dispatch(thunkGetOrders())
-  }, [store.reduxOrders])
+  }, [])
 
-  const renderItem = ({ item }) => <OrderDetails {...item} />
-  return (
-    <View style={{ flex: 1 }}>
-      <FlatList
-        data={store.reduxOrders}
-        renderItem={renderItem}
-        keyExtractor={i => new Date().getMilliseconds() + Math.random * 100} />
-    </View>
-  )
+  function renderItem(props) {
+    return <OrderDetails {...props.item} />
+  }
+
+  if (reduxOrders) {
+    return (
+      <View style={{ flex: 1 }} >
+        <FlatList
+          data={reduxOrders}
+          renderItem={renderItem}
+          keyExtractor={el => el.id} />
+      </View>
+    )
+  }
 }
 
 export default Orders

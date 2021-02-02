@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { View, TextInput } from "react-native";
 import { db } from "../../../firebase";
 import { thunkGetItems } from '../../redux/store'
+import Camera from './CamCapture'
 import NavButton from "../commonComponents/NavButton";
 import WebcamCapture from "./WebcamCapture";
 import styles from "../../styles";
@@ -36,8 +37,9 @@ function AddItem() {
         <TextInput ref={price} style={styles.input} placeholder="price" />
         <TextInput ref={tags} style={styles.input} placeholder="tags" />
       </View>
-      <WebcamCapture saveImage={saveImage} />
+      {/* <WebcamCapture saveImage={saveImage} /> */}
       <NavButton text="Add item" style={styles.greenbutton} onPress={addItem} />
+      <Camera />
     </View>
   );
 }
