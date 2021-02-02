@@ -56,17 +56,17 @@ function Cart({ navigation }) {
   const saveOrder = async () => {
     if (store.userId && store.cart.length) {
       if (items.length > 0) {
-        Alert.alert('Make an order', 'Confirm you want to order this items?', [{
-          text: 'No'
-        },
-        {
-          text: 'Yes',
-          onPress: () => {
-            setItems([])
-            db.collection("Orders").add({ Items: items, user: store.userId })
-            dispatch({ type: 'CLEAR_CART' })
-          }
-        }])
+        // Alert.alert('Make an order', 'Confirm you want to order this items?', [{
+        //   text: 'No'
+        // },
+        // {
+        //   text: 'Yes',
+        //   onPress: () => {
+        setItems([])
+        db.collection("Orders").add({ Items: items, user: store.userId })
+        dispatch({ type: 'CLEAR_CART' })
+        // }
+        // }])
       }
     } else if (store.cart.length) {
       navigation.navigate('Account')
