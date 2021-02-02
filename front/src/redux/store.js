@@ -11,7 +11,7 @@ const initState = {
   reduxOrders: []
 };
 
-export const store = createStore(reducer, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
+export const store = createStore(reducer, applyMiddleware(thunk))
 
 export const thunkGetItems = (filterTag = '') => {
   return (dispatch) => {
@@ -53,8 +53,9 @@ export const thunkGetOrders = () => {
       data.forEach((doc) => {
         const details = doc.data()
         arr.push({
+          id: doc.id,
           user: details.user,
-          items: details.items,
+          items: details.Items,
         })
       });
       dispatch({ type: 'GET_ORDERS', payload: arr })
@@ -70,7 +71,6 @@ export const thunkGetUser = (userId) => {
     })
   }
 }
-
 
 function reducer(state = initState, action) {
   if (action.type === "AUTH") {

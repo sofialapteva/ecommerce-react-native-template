@@ -11,7 +11,7 @@ function Main() {
   React.useEffect(() => {
     dispatch(thunkGetItems())
     setItems(state.reduxItems)
-  }, [state.reduxItems])
+  }, [])
 
   async function deleteHandler(id) {
     Alert.alert('delete')
