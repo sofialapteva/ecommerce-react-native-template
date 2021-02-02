@@ -14,10 +14,10 @@ const initState = {
 export const store = createStore(reducer, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
 
 export const thunkGetItems = (filterTag = '') => {
-  return async (dispatch) => {
-    db.collection("Items").get().then((data) => {
+  return (dispatch) => {
+    db.collection("Items").get().then(async (data) => {
       let arr = []
-      data.forEach((doc) => {
+      await data.forEach((doc) => {
         const details = doc.data()
         if (filterTag !== '') {
           details.tags.includes(filterTag) ?
@@ -40,7 +40,8 @@ export const thunkGetItems = (filterTag = '') => {
           })
         }
       });
-      dispatch({ type: 'SET_ITEMS', payload: arr })
+      console.log(arr)
+      await dispatch({ type: 'SET_ITEMS', payload: arr })
     })
   }
 }
@@ -90,6 +91,7 @@ function reducer(state = initState, action) {
     const tag = (action.payload === 'Everything') ? '' : action.payload
     return { ...state, filterTag: tag }
   } else if (action.type === 'SET_ITEMS') {
+    console.log(action.payload, 'from reducer')
     return { ...state, reduxItems: action.payload }
   } else if (action.type === 'GET_ORDERS') {
     return { ...state, reduxOrders: action.payload }

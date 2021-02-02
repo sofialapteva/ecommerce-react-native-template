@@ -8,16 +8,15 @@ import ItemOnMain from './ItemOnMain'
 import { TextInput } from 'react-native-gesture-handler'
 
 function Main() {
-
-  const [items, setItems] = React.useState(reduxItems)
+  const [loading, setloading] = React.useState(true)
+  const reduxItems = useSelector(({ reduxItems }) => reduxItems)
+  const [searchRes, setSearchRes] = React.useState('')
   const [text, setText] = React.useState('')
   const filterTag = useSelector(({ filterTag }) => filterTag)
-  const reduxItems = useSelector(({ reduxItems }) => reduxItems)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
     dispatch(thunkGetItems(filterTag))
-    setItems(reduxItems)
   }, [filterTag])
 
 
@@ -25,13 +24,18 @@ function Main() {
     return <ItemOnMain {...item} />
   }
 
+  function fetchItems() {
+    dispatch(thunkGetItems())
+    setloading(false)
+  }
+
   function findItems() {
     if (text !== '') {
-      const searchRes = items.filter(el => el.productName.toLowerCase().includes(text.trim().toLowerCase()))
-      searchRes.length ? setItems(searchRes) : Alert.alert('', 'No results')
+      const searchRes = reduxItems.filter(el => el.productName.toLowerCase().includes(text.trim().toLowerCase()))
+      searchRes.length ? setSearchRes(searchRes) : Alert.alert('', 'No results')
       setText('')
     } else {
-      fetchItems()
+      dispatch(thunkGetItems())
     }
   }
 
@@ -46,9 +50,12 @@ function Main() {
         onChangeText={input => setText(input)}
         onSubmitEditing={findItems} />
       <FlatList
-        data={items}
+        data={searchRes || reduxItems}
         renderItem={renderItem}
-        keyExtractor={item => item.id} />
+        keyExtractor={item => item.id}
+        onRefresh={fetchItems}
+        refreshing={loading}
+      />
     </View>
   )
 }
