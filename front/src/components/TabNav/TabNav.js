@@ -79,7 +79,7 @@ export default function TabNav() {
       <Tab.Screen name="Main" component={Main} />
       <Tab.Screen name="Account" component={AccountStackNavScreen} />
       {itemsInCart ? <Tab.Screen name="Cart" component={Cart} options={{ tabBarBadge: itemsInCart }} /> : <Tab.Screen name="Cart" component={Cart} />}
-      {store.userId == 'Z37MWnBGmodW6wfdFnCxpYFK3Jl1' ? (<Tab.Screen name='CMS' component={CMSNavScreen} />) : (<></>)
+      {store.userId == 'YALcicZ94ZVLDzPp4tgtGqSre7z1' ? (<Tab.Screen name='CMS' component={CMSNavScreen} />) : (<></>)
       }
     </Tab.Navigator>
   );

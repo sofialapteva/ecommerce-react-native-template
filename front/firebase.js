@@ -10,10 +10,10 @@ import "firebase/firestore";
 // Initialize Firebase
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC4v9TjUSFFPxjFhQV3rafhjYjBbvTilXs",
-  authDomain: "constructor-of-internet-shop.firebaseapp.com",
-  projectId: "constructor-of-internet-shop",
-  storageBucket: "constructor-of-internet-shop.appspot.com",
+  apiKey: "AIzaSyD6prJtQfiY7exgruZL2m_PpPz4YmWlRRI",
+  authDomain: "ecommerce-template-wolves.firebaseapp.com",
+  projectId: "ecommerce-template-wolves",
+  storageBucket: "ecommerce-template-wolves.appspot.com",
   messagingSenderId: "1001010159481",
   appId: "1:1001010159481:web:7c90912bc65076a37cd9a8"
 };

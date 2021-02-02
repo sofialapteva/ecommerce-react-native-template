@@ -18,7 +18,7 @@ function Main() {
   React.useEffect(() => {
     dispatch(thunkGetItems(filterTag))
     setItems(reduxItems)
-  }, [reduxItems])
+  }, [filterTag])
 
 
   function renderItem({ item }) {
