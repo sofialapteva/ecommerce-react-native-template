@@ -8,7 +8,7 @@ function ItemOnMain({ id, oldPrice, price, tags, productName, uri }) {
   return (
     <View style={tailwind('h-32 border-2 border-gray-200 flex-row flex justify-between')}>
       <View>
-        <Image source={uri} style={tailwind('h-28 w-28 m-2 bg-gray-200')} />
+        <Image source={{ uri: uri }} style={tailwind('h-28 w-28 m-2 bg-gray-200')} />
       </View>
       <View style={tailwind('flex justify-around py-10 text-left w-5/12')}>
         <Text style={tailwind('text-sm font-bold')}>{productName}</Text>

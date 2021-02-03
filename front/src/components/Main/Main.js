@@ -8,7 +8,6 @@ import ItemOnMain from './ItemOnMain'
 import { TextInput } from 'react-native-gesture-handler'
 
 function Main() {
-  const [loading, setloading] = React.useState(true)
   const reduxItems = useSelector(({ reduxItems }) => reduxItems)
   const [searchRes, setSearchRes] = React.useState('')
   const [text, setText] = React.useState('')
@@ -53,8 +52,6 @@ function Main() {
         data={searchRes || reduxItems}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        onRefresh={fetchItems}
-        refreshing={loading}
       />
     </View>
   )
