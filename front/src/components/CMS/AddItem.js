@@ -18,9 +18,7 @@ function AddItem() {
   const dispatch = useDispatch()
 
   const addItem = () => {
-    console.log(name,
-      price,
-      tags)
+    console.log('')
     db.collection("Items")
       .add({
         productName: name,
@@ -35,24 +33,20 @@ function AddItem() {
     setTags('')
   };
   const saveImg = async (uri) => {
-    console.log(uri)
     const childPath = Math.random() * 10000 + ''
     const responce = await fetch(uri.uri);
-    console.log('responce', responce)
     const blob = await responce.blob();
-
     const image = storage.ref().child(childPath).put(blob)
     const taskProgress = snapshot => {
-      console.log('transferred' + snapshot.bytesTransferred)
+      console.log('');
     }
     const taskCompleted = () => {
       image.snapshot.ref.getDownloadURL().then((snapshot) => {
         setImg(snapshot)
-        console.log(snapshot)
       })
     }
     const taskError = snapshot => {
-      console.log(snapshot);
+      console.log('');
     }
     image.on("state_changed", taskProgress, taskError, taskCompleted)
   }

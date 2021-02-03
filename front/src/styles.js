@@ -3,8 +3,9 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    borderTopColor: 'black',
-    borderTopWidth: 25
+    borderTopColor: '#127475',
+    borderTopWidth: 25,
+    backgroundColor: '#127475'
   },
   container: {
     flex: 1,
@@ -18,16 +19,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     marginVertical: 15
   },
-  itemInCart: {
-    backgroundColor: 'rgba(95, 95, 95, 0.2)',
-    height: 100,
-    marginVertical: 5,
-    width: '90%',
-    marginHorizontal: '5%',
-    borderRadius: 10,
+  itemOnMain: {
+    marginHorizontal: 3,
+    paddingVertical: 1,
+    height: '8rem',
+    marginVertical: 4,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    elevation: 15,
   },
   emptyCartImage: {
     width: 200,
@@ -35,13 +41,6 @@ const styles = StyleSheet.create({
     maxWidth: '90%',
     marginHorizontal: 'auto',
     marginTop: '10%',
-  },
-  cartImg: {
-    height: '60%',
-    width: '20%',
-    borderRadius: 10,
-    margin: 10,
-    backgroundColor: 'gray'
   },
   iconCross: {
     alignSelf: 'flex-start',
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
   },
   greenbutton: {
     width: '33%',
-    backgroundColor: 'green',
+    backgroundColor: '#0e9594',
     height: 35,
     paddingVertical: 8,
     borderRadius: 5,
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
   },
   redbutton: {
     width: '33%',
-    backgroundColor: 'red',
+    backgroundColor: '#f2542d',
     height: 35,
     paddingTop: 8,
     borderRadius: 5,
@@ -75,18 +74,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   navbar: {
-    backgroundColor: 'blue',
+    backgroundColor: '#127475',
     width: '100%',
     minHeight: 50,
     maxHeight: '7%',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   text: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 17
+    fontSize: 20
   },
   largeText: {
     fontSize: 15,
@@ -105,11 +104,15 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   input: {
-    height: 30, borderColor: 'gray', borderWidth: 1, margin: 4, padding: 2
+    height: 30,
+    borderColor: 'gray',
+    borderWidth: 1,
+    margin: 4,
+    padding: 2
   },
   addItem: {
-  //  width: 100,
-  } 
+    //  width: 100,
+  }
 })
 
 export default styles
@@ -117,4 +120,6 @@ export default styles
 export const stylesTailwind = {
   menuItem: 'h-20 uppercase w-full rounded-xl bg-gray-300 pl-10 py-6 flex flex-row mb-2',
   menuText: 'text-xl font-bold text-center',
+  img: 'h-28 w-28 m-2 bg-gray-200',
+  label: 'flex justify-around py-10 text-left w-5/12',
 }

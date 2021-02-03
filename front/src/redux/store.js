@@ -40,7 +40,7 @@ export const thunkGetItems = (filterTag = '') => {
           })
         }
       });
-      console.log(arr)
+      console.log('')
       await dispatch({ type: 'SET_ITEMS', payload: arr })
     })
   }
@@ -91,7 +91,6 @@ function reducer(state = initState, action) {
     const tag = (action.payload === 'Everything') ? '' : action.payload
     return { ...state, filterTag: tag }
   } else if (action.type === 'SET_ITEMS') {
-    console.log(action.payload, 'from reducer')
     return { ...state, reduxItems: action.payload }
   } else if (action.type === 'GET_ORDERS') {
     return { ...state, reduxOrders: action.payload }

@@ -30,7 +30,7 @@ function Cart({ navigation }) {
     }
   }
   React.useEffect(() => {
-    console.log(store)
+    console.log('')
     fetchCart()
   }, [store.cart])
   React.useEffect(() => {

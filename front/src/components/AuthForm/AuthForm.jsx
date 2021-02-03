@@ -45,9 +45,9 @@ function AuthForm({ navigation }) {
     auth.onAuthStateChanged(async user => {
       if (user) {
         await dispatch({ type: "AUTH", payload: user.uid })
-        console.log('user logged in', user.uid, store)
+        console.log('')
       } else {
-        console.log('user logged out')
+        console.log('')
       }
     })
   }, [])

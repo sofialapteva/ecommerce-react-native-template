@@ -33,7 +33,6 @@ export default function App({ saveImg }) {
             if (cameraRef) {
               let photo = await cameraRef.takePictureAsync();
               saveImg(photo);
-              // console.log('photo', photo);
             }
           }}>
             <View style={{

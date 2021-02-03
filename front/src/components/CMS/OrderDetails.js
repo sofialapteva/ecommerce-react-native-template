@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, TextInput, Alert } from 'react-native'
-import NavButton from '../commonComponents/NavButton'
 import tailwind from 'tailwind-rn'
 import { db } from '../../../firebase'
 import styles from '../../styles'

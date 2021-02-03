@@ -2,10 +2,11 @@ import React from 'react'
 import { View, Text, Image } from 'react-native'
 import { Entypo } from '@expo/vector-icons';
 import tailwind from 'tailwind-rn'
+import styles, { stylesTailwind } from '../../styles';
 
 function Item({ item, removeItem }) {
   return (
-    <View style={tailwind('h-32 border-2 border-gray-200 flex-row flex justify-between')}>
+    <View style={styles.itemOnMain}>
       <Image source={{ uri: item.uri }} style={tailwind('h-28 w-28 m-2 bg-gray-200')} />
       <View style={tailwind('flex justify-around py-10 text-left w-5/12')}>
         <Text style={tailwind('text-sm font-bold')}>{item.productName}</Text>

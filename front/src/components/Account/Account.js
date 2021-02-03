@@ -38,15 +38,14 @@ function Account({ navigation }) {
 
   return (
     <View>
-      {store.userId ? <NavButton style={styles.redbutton} text='Logout' onPress={() => navigation.navigate('Auth')} /> : <NavButton style={styles.greenbutton} text='Login' onPress={() => navigation.navigate('Auth')} />}
       {store.userData.name ?
         <View>
-          <Text style={styles.largeText}>Your name: {store.userData.name}</Text>
-          <Text style={styles.largeText}>Your surname: {store.userData.surname}</Text>
-          <Text style={styles.largeText}>Address of delivery:</Text>
-          <Text style={styles.largeText}>Your city: {store.userData.city}</Text>
-          <Text style={styles.largeText}>Your street: {store.userData.street}</Text>
-          <Text style={styles.largeText}>Your apartment:{store.userData.apartment}</Text>
+          <Text style={styles.input}>Your name: {store.userData.name}</Text>
+          <Text style={styles.input}>Your surname: {store.userData.surname}</Text>
+          <Text style={styles.input}>Address of delivery:</Text>
+          <Text style={styles.input}>Your city: {store.userData.city}</Text>
+          <Text style={styles.input}>Your street: {store.userData.street}</Text>
+          <Text style={styles.input}>Your apartment:{store.userData.apartment}</Text>
         </View> : <></>}
       {store.userId && !store.userData.name ?
         <View>
@@ -58,6 +57,7 @@ function Account({ navigation }) {
           <NavButton style={styles.greenbutton}
             text='Save' onPress={saveInfoHandler} />
         </View> : <></>}
+      {store.userId ? <NavButton style={styles.redbutton} text='Logout' onPress={() => navigation.navigate('Auth')} /> : <NavButton style={styles.greenbutton} text='Login' onPress={() => navigation.navigate('Auth')} />}
     </View>
   )
 }
