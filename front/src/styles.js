@@ -3,12 +3,13 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    borderTopColor: '#C17C74',
+    borderTopColor: '#312244',
     borderTopWidth: 25,
-    backgroundColor: '#C17C74'
+    backgroundColor: '#312244'
   },
   container: {
     flex: 1,
+    backgroundColor: '#b7b7a4'
   },
   buttonBlock: {
     height: '10%',
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 10,
     elevation: 15,
+    backgroundColor: '#f0efeb'
   },
   emptyCartImage: {
     width: 200,
@@ -52,19 +54,21 @@ const styles = StyleSheet.create({
   },
   greenbutton: {
     width: '33%',
-    backgroundColor: '#9DAD6F',
+    backgroundColor: '#cb997e',
     height: 35,
     paddingVertical: 8,
     borderRadius: 5,
-    margin: 2
+    margin: 2,
+    elevation: 3,
   },
   redbutton: {
     width: '33%',
-    backgroundColor: '#F87575',
+    backgroundColor: '#eddcd2',
     height: 35,
     paddingTop: 8,
     borderRadius: 5,
-    margin: 2
+    margin: 2,
+    elevation: 3,
   },
   label: {
     fontSize: 18,
@@ -74,13 +78,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   navbar: {
-    backgroundColor: '#C17C74',
+    backgroundColor: '#312244',
     width: '100%',
     minHeight: 50,
     maxHeight: '7%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    elevation: 10
   },
   text: {
     color: 'white',
@@ -105,14 +110,14 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 30,
-    borderColor: 'gray',
     borderWidth: 1,
+    borderColor: '#ddbea9',
     margin: 4,
-    padding: 2
+    padding: 5,
+    textAlign: 'center',
+    backgroundColor: 'white',
+    borderRadius: 5
   },
-  addItem: {
-    //  width: 100,
-  }
 })
 
 export default styles

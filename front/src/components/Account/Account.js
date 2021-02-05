@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { thunkGetUser } from '../../redux/store'
 
 function Account({ navigation }) {
+  const [trigger, setTrigger] = useState(false)
   const [userName, setUserName] = useState('')
   const [userSurname, setUserSurname] = useState('')
   const [userCity, setUserCity] = useState('')
@@ -20,7 +21,12 @@ function Account({ navigation }) {
     if (store.userId) {
       dispatch(thunkGetUser(store.userId))
     }
-  }, [])
+  }, [trigger])
+  React.useEffect(() => {
+    if (store.userId) {
+      dispatch(thunkGetUser(store.userId))
+    }
+  }, [trigger])
   React.useEffect(() => {
     if (store.userId) {
       dispatch(thunkGetUser(store.userId))
@@ -36,6 +42,7 @@ function Account({ navigation }) {
         apartment: userApartment,
         phone: userPhone,
       })
+      setTrigger(pre => !pre)
       navigation.navigate('Главная')
     } else {
       navigation.navigate('Аутентификация')

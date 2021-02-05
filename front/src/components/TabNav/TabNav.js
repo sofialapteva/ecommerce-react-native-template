@@ -22,7 +22,7 @@ const CMSNav = createStackNavigator();
 
 function AccountStackNavScreen() {
   return (
-    <AccountStackNav.Navigator headerStyle={{ height: 80, backgroundColor: '#C17C74' }}>
+    <AccountStackNav.Navigator headerStyle={{ height: 80, backgroundColor: '#ddbea9', }}>
       <AccountStackNav.Screen name='Аккаунт' component={Account} />
       <AccountStackNav.Screen name="Аутентификация" component={AuthForm} />
     </AccountStackNav.Navigator>
@@ -31,7 +31,7 @@ function AccountStackNavScreen() {
 
 function CMSNavScreen() {
   return (
-    <CMSNav.Navigator headerStyle={{ height: 80, backgroundColor: '#C17C74' }}>
+    <CMSNav.Navigator headerStyle={{ height: 80, backgroundColor: '#ddbea9' }}>
       <CMSNav.Screen name='Настройки' component={CMS} />
       <CMSNav.Screen name="Товары" component={EditItems} />
       <CMSNav.Screen name="AddItem" component={AddItem} />
@@ -58,7 +58,7 @@ export default function TabNav() {
   const itemsInCart = useSelector(({ cart }) => cart.length)
   return (
     <Tab.Navigator
-      barStyle={{ backgroundColor: '#C17C74' }}
+      barStyle={{ backgroundColor: '#ddbea9' }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size = 24 }) => {
           let iconName;

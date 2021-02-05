@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux'
-import { View, TextInput, Image } from "react-native";
+import { View, TextInput, Image, Alert } from "react-native";
 import { db, storage } from "../../../firebase";
 import { thunkGetItems } from '../../redux/store'
-// import firebase from 'firebase'
 require('firebase/firestore')
 require('firebase/firebase-storage')
 
@@ -19,20 +18,25 @@ function AddItem() {
   const dispatch = useDispatch()
 
   const addItem = () => {
-    console.log('')
-    db.collection("Items")
-      .add({
-        productName: name,
-        price: price,
-        oldPrice: price,
-        uri: img,
-        tags: tags.trim().split(" "),
-      })
-    dispatch(thunkGetItems())
-    setName('')
-    setPrice('')
-    setTags('')
-    setImg('')
+    if (img !== '' && name !== '' && price !== '' && tags !== '') {
+      console.log('')
+      db.collection("Items")
+        .add({
+          productName: name,
+          price: price,
+          oldPrice: price,
+          uri: img,
+          tags: tags.trim().split(" "),
+        })
+      dispatch(thunkGetItems())
+      setName('')
+      setPrice('')
+      setTags('')
+      setImg('')
+      Alert.alert('', "Товар добавлен")
+    } else {
+      Alert.alert('', "Заполните информацию")
+    }
   };
   const saveImg = async (uri) => {
     const childPath = Math.random() * 10000 + ''
