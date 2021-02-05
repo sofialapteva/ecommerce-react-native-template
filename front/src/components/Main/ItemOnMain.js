@@ -16,7 +16,7 @@ function ItemOnMain({ id, oldPrice, price, tags, productName, uri }) {
         <Text style={tailwind('text-sm font-bold')}>{productName}</Text>
       </View>
       <View style={tailwind('flex justify-around py-10')}>
-        <Text style={tailwind('text-sm line-through')}>{oldPrice}</Text>
+        {oldPrice > price ? <Text style={tailwind('text-sm line-through')}>{oldPrice}</Text> : <></>}
         <Text style={tailwind('text-sm font-bold')}>{price}</Text>
       </View>
       <Entypo name="shopping-cart" size={24} color="gray" style={tailwind('p-2 self-center')} onPress={() => dispatch({ type: "ADD_TO_CART", payload: id })} />

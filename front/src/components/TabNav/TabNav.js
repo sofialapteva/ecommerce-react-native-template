@@ -9,10 +9,9 @@ import Menu from '../Menu/Menu'
 import Main from '../Main/Main'
 import Account from '../Account/Account'
 import AuthForm from '../AuthForm/AuthForm'
-
+import { thunkGetUser } from '../../redux/store'
 import CMS from '../CMS/CMS.js'
 import EditItems from '../CMS/EditItems'
-import Statistics from '../CMS/Statistics'
 import AddItem from '../CMS/AddItem'
 import Orders from '../CMS/Orders'
 
@@ -23,21 +22,20 @@ const CMSNav = createStackNavigator();
 
 function AccountStackNavScreen() {
   return (
-    <AccountStackNav.Navigator headerStyle={{ height: 80, backgroundColor: '#127475' }}>
-      <AccountStackNav.Screen name="Account" component={Account} />
-      <AccountStackNav.Screen name="Auth" component={AuthForm} />
+    <AccountStackNav.Navigator headerStyle={{ height: 80, backgroundColor: '#C17C74' }}>
+      <AccountStackNav.Screen name='Аккаунт' component={Account} />
+      <AccountStackNav.Screen name="Аутентификация" component={AuthForm} />
     </AccountStackNav.Navigator>
   );
 }
 
 function CMSNavScreen() {
   return (
-    <CMSNav.Navigator headerStyle={{ height: 80, backgroundColor: '#127475' }}>
-      <CMSNav.Screen name="CMS" component={CMS} />
-      <CMSNav.Screen name="EditItems" component={EditItems} />
-      <CMSNav.Screen name="Statistics" component={Statistics} />
+    <CMSNav.Navigator headerStyle={{ height: 80, backgroundColor: '#C17C74' }}>
+      <CMSNav.Screen name='Настройки' component={CMS} />
+      <CMSNav.Screen name="Товары" component={EditItems} />
       <CMSNav.Screen name="AddItem" component={AddItem} />
-      <CMSNav.Screen name="Orders" component={Orders} />
+      <CMSNav.Screen name="Заказы" component={Orders} />
     </CMSNav.Navigator>
   );
 }
@@ -53,35 +51,38 @@ export default function TabNav() {
         dispatch({ type: "AUTH", payload: '' })
       }
     })
+    if (store.userId) {
+      dispatch(thunkGetUser(store.userId))
+    }
   }, [])
   const itemsInCart = useSelector(({ cart }) => cart.length)
   return (
     <Tab.Navigator
-      barStyle={{ backgroundColor: '#127475' }}
+      barStyle={{ backgroundColor: '#C17C74' }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size = 24 }) => {
           let iconName;
-          if (route.name === 'Main') {
+          if (route.name === 'Главная') {
             iconName = 'home';
-          } else if (route.name === 'Cart') {
+          } else if (route.name === 'Корзина') {
             iconName = 'shoppingcart';
-          } else if (route.name === 'Account') {
+          } else if (route.name === 'Аккаунт') {
             iconName = 'user';
-          } else if (route.name === 'Menu') {
+          } else if (route.name === 'Меню') {
             iconName = focused ? 'menuunfold' : 'menufold';
-          } else if (route.name === 'CMS') {
+          } else if (route.name === 'Настройки') {
             iconName = 'setting'
           }
           return <AntDesign name={iconName} size={size} color={color} />;
         },
       })}
-      initialRouteName="Main"
+      initialRouteName='Главная'
     >
-      <Tab.Screen name="Menu" component={Menu} />
-      <Tab.Screen name="Main" component={Main} />
-      {itemsInCart ? <Tab.Screen name="Cart" component={Cart} options={{ tabBarBadge: itemsInCart }} /> : <Tab.Screen name="Cart" component={Cart} />}
-      <Tab.Screen name="Account" component={AccountStackNavScreen} />
-      {store.userId == 'YALcicZ94ZVLDzPp4tgtGqSre7z1' ? (<Tab.Screen name='CMS' component={CMSNavScreen} />) : (<></>)
+      <Tab.Screen name='Меню' component={Menu} />
+      <Tab.Screen name='Главная' component={Main} />
+      {itemsInCart ? <Tab.Screen name='Корзина' component={Cart} options={{ tabBarBadge: itemsInCart }} /> : <Tab.Screen name='Корзина' component={Cart} />}
+      <Tab.Screen name='Аккаунт' component={AccountStackNavScreen} />
+      {store.userId == 'YALcicZ94ZVLDzPp4tgtGqSre7z1' ? (<Tab.Screen name='Настройки' component={CMSNavScreen} />) : (<></>)
       }
     </Tab.Navigator>
   );

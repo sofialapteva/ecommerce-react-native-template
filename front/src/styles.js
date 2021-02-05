@@ -3,9 +3,9 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    borderTopColor: '#127475',
+    borderTopColor: '#C17C74',
     borderTopWidth: 25,
-    backgroundColor: '#127475'
+    backgroundColor: '#C17C74'
   },
   container: {
     flex: 1,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   itemOnMain: {
     marginHorizontal: 3,
     paddingVertical: 1,
-    height: '8rem',
+    height: 128,
     marginVertical: 4,
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   greenbutton: {
     width: '33%',
-    backgroundColor: '#0e9594',
+    backgroundColor: '#9DAD6F',
     height: 35,
     paddingVertical: 8,
     borderRadius: 5,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   redbutton: {
     width: '33%',
-    backgroundColor: '#f2542d',
+    backgroundColor: '#F87575',
     height: 35,
     paddingTop: 8,
     borderRadius: 5,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   navbar: {
-    backgroundColor: '#127475',
+    backgroundColor: '#C17C74',
     width: '100%',
     minHeight: 50,
     maxHeight: '7%',

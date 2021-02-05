@@ -17,13 +17,13 @@ function Menu({ navigation }) {
       const itemTags = doc.data().tags
       tagSet.add(...itemTags)
     })
-    setTags(['Everything', ...tagSet])
+    setTags(['Все товары', ...tagSet])
   }
 
   function setFilter(item) {
     dispatch({ type: 'SET_TAG', payload: item })
     dispatch(thunkGetItems(item))
-    navigation.navigate('Main')
+    navigation.navigate('Главная')
   }
 
   React.useEffect(() => {
@@ -35,7 +35,7 @@ function Menu({ navigation }) {
     <FontAwesome5 name="arrow-circle-right" size={24} color="black" style={tailwind('ml-10')} /></TouchableOpacity>)
   return (
     <View>
-      <TopBar style={styles.navbar} tabName={'Menu'} />
+      <TopBar style={styles.navbar} tabName={'Меню'} />
 
       <View style={tailwind('p-5')}>
         <FlatList data={tags} renderItem={renderItem} keyExtractor={item => tags.indexOf(item).toString()} />

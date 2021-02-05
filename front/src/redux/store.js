@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore, compose } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { db } from '../../firebase'
 
@@ -88,7 +88,7 @@ function reducer(state = initState, action) {
   } else if (action.type === "CLEAR_CART") {
     return { ...state, cart: [] }
   } else if (action.type === "SET_TAG") {
-    const tag = (action.payload === 'Everything') ? '' : action.payload
+    const tag = (action.payload === 'Все товары') ? '' : action.payload
     return { ...state, filterTag: tag }
   } else if (action.type === 'SET_ITEMS') {
     return { ...state, reduxItems: action.payload }

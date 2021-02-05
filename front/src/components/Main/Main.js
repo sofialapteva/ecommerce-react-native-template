@@ -14,18 +14,19 @@ function Main() {
   const filterTag = useSelector(({ filterTag }) => filterTag)
   const dispatch = useDispatch()
 
+
   React.useEffect(() => {
     dispatch(thunkGetItems(filterTag))
+  }, [])
+
+  React.useEffect(() => {
+    dispatch(thunkGetItems(filterTag))
+    setSearchRes('')
   }, [filterTag])
 
 
   function renderItem({ item }) {
     return <ItemOnMain {...item} />
-  }
-
-  function fetchItems() {
-    dispatch(thunkGetItems())
-    setloading(false)
   }
 
   function findItems() {
@@ -35,6 +36,7 @@ function Main() {
       setText('')
     } else {
       dispatch(thunkGetItems())
+      setSearchRes('')
     }
   }
 
@@ -42,10 +44,10 @@ function Main() {
     <View style={{ flex: 1 }}>
       <TopBar
         style={styles.navbar}
-        tabName={'Ecommerce Template'} />
+        tabName={'Шаблон E-commerce'} />
       <TextInput value={text}
         style={styles.input}
-        placeholder='search'
+        placeholder='поиск'
         onChangeText={input => setText(input)}
         onSubmitEditing={findItems} />
       <FlatList

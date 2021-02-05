@@ -17,7 +17,7 @@ function AuthForm({ navigation }) {
     auth.onAuthStateChanged(user => {
       if (store.userId) {
         dispatch({ type: "AUTH", payload: user.uid })
-        navigation.navigate('Main')
+        navigation.navigate('Главная')
       }
     })
   };
@@ -29,7 +29,7 @@ function AuthForm({ navigation }) {
     auth.onAuthStateChanged(user => {
       if (store.userId) {
         dispatch({ type: "AUTH", payload: user.uid })
-        navigation.navigate('Main')
+        navigation.navigate('Главная')
       }
     })
 
@@ -38,7 +38,7 @@ function AuthForm({ navigation }) {
   const logOutHandler = () => {
     auth.signOut()
     dispatch({ type: "LOG_OUT" })
-    navigation.navigate('Main')
+    navigation.navigate('Главная')
   }
 
   useEffect(() => {
@@ -53,12 +53,12 @@ function AuthForm({ navigation }) {
   }, [])
   return (
     <View>
-      {store.userId ? (<NavButton text="Logout" style={styles.redbutton} onPress={logOutHandler} />) : (<>
-        <TextInput onChangeText={(text) => setEmail(text)} style={styles.input} placeholder='login' />
-        <TextInput secureTextEntry={true} onChangeText={(text) => setPassword(text)} style={styles.input} placeholder='password' />
+      {store.userId ? (<NavButton text="Выйти" style={styles.redbutton} onPress={logOutHandler} />) : (<>
+        <TextInput onChangeText={(text) => setEmail(text)} style={styles.input} placeholder='e-mail' />
+        <TextInput secureTextEntry={true} onChangeText={(text) => setPassword(text)} style={styles.input} placeholder='пароль' />
         <View style={styles.buttonBlock}>
-          <NavButton text="Login" style={styles.greenbutton} onPress={loginHandler} />
-          <NavButton text="Register" style={styles.greenbutton} onPress={registerHandler} />
+          <NavButton text='Войти' style={styles.greenbutton} onPress={loginHandler} />
+          <NavButton text='Регистрация' style={styles.greenbutton} onPress={registerHandler} />
         </View>
       </>)}
     </View>

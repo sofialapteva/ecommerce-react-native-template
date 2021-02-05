@@ -33,17 +33,18 @@ function Cart({ navigation }) {
     console.log('')
     fetchCart()
   }, [store.cart])
+
   React.useEffect(() => {
     if (items.length === 0) {
       setPlaceholder(<View>
-        <Text style={styles.largeText}>Add items to the cart</Text>
-        <Image source={require('./empty-cart.svg')} style={styles.emptyCartImage} />
+        <Text style={styles.largeText}>Добавьте товары в корзину</Text>
       </View>
       )
     } else {
       setPlaceholder(null)
     }
   }, [items])
+
   function clearCart() {
     setItems([]);
     dispatch({ type: 'CLEAR_CART' })
@@ -54,34 +55,35 @@ function Cart({ navigation }) {
     filteredItems ? setItems(filteredItems) : setItems([])
   }
   const saveOrder = async () => {
-    if (store.userId && store.cart.length) {
-      if (items.length > 0) {
-        // Alert.alert('Make an order', 'Confirm you want to order this items?', [{
-        //   text: 'No'
-        // },
-        // {
-        //   text: 'Yes',
-        //   onPress: () => {
-        setItems([])
-        db.collection("Orders").add({ Items: items, user: store.userId })
-        dispatch({ type: 'CLEAR_CART' })
-        // }
-        // }])
+    if (store.userData.name && store.cart.length) {
+      if (store.cart.length > 0) {
+        Alert.alert('Оформить заказ', 'Подтвердите, вы хотите оформить заказ?', [{
+          text: 'Нет'
+        },
+        {
+          text: 'Да',
+          onPress: () => {
+            setItems([])
+            db.collection("Orders").add({ Items: items, user: store.userData })
+            dispatch({ type: 'CLEAR_CART' })
+            navigation.navigate('Главная')
+          }
+        }])
       }
     } else if (store.cart.length) {
-      navigation.navigate('Account')
+      navigation.navigate('Аккаунт')
     } else {
-      navigation.navigate('Main')
+      navigation.navigate('Главная')
     }
   }
   return (
     <View style={styles.container}>
-      <TopBar style={styles.navbar} tabName={'Cart'} />
+      <TopBar style={styles.navbar} tabName={'Корзина'} />
       {placeholder}
       <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.id + Math.random().toString()} />
       <View style={styles.buttonBlock}>
-        <NavButton text='Clear' style={styles.redbutton} onPress={clearCart} />
-        <NavButton text='Order' style={styles.greenbutton} onPress={saveOrder} />
+        <NavButton text='Очистить' style={styles.redbutton} onPress={clearCart} />
+        <NavButton text='Оформить' style={styles.greenbutton} onPress={saveOrder} />
       </View>
     </View>
   )

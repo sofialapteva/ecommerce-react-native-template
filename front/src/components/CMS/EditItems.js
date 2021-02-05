@@ -11,10 +11,10 @@ function Main() {
   React.useEffect(() => {
     dispatch(thunkGetItems())
     setItems(state.reduxItems)
-  }, [])
+  }, [state.reduxItems.length])
 
   async function deleteHandler(id) {
-    Alert.alert('delete')
+    Alert.alert('', 'Товар удалён')
     await db.collection("Items").doc(id).delete()
     dispatch(thunkGetItems())
   }

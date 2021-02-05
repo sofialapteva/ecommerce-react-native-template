@@ -6,13 +6,10 @@ function CMS({ navigation }) {
   return (
     <View>
       <View style={styles.buttonBlock}>
-        <NavButton style={styles.greenbutton} text='Add item' onPress={() => navigation.navigate('AddItem')} />
-        <NavButton style={styles.greenbutton} text='Edit items' onPress={() =>
-          navigation.navigate('EditItems')} />
-      </View>
-      <View style={styles.buttonBlock}>
-        <NavButton style={styles.greenbutton} text='Statistics' onPress={() => navigation.navigate('Statistics')} />
-        <NavButton style={styles.greenbutton} text='Orders' onPress={() => navigation.navigate('Orders')} />
+        <NavButton style={styles.greenbutton} text='Новый товар' onPress={() => navigation.navigate('AddItem')} />
+        <NavButton style={styles.greenbutton} text='Товары' onPress={() =>
+          navigation.navigate('Товары')} />
+        <NavButton style={styles.greenbutton} text='Заказы' onPress={() => navigation.navigate('Заказы')} />
       </View>
     </View>
   )

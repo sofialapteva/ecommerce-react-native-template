@@ -7,9 +7,6 @@ import OrderDetails from './OrderDetails'
 function Orders() {
   const dispatch = useDispatch()
   const reduxOrders = useSelector(({ reduxOrders }) => reduxOrders)
-  function completeHandler() {
-
-  }
 
   React.useEffect(() => {
     dispatch(thunkGetOrders())
